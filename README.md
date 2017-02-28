@@ -20,4 +20,4 @@ Here's what I plan to do for my recitation. **I'd recommend looking at the Drive
 
 Short demo:
 
-![short demo](https://lh6.googleusercontent.com/ukLd70Oh63hHn6_Q2zZQ0CCQSEh6poYhQ0vRutj6upSyeKEtA7kv9xSq7LrphGWWYcmqlxg6EnLN05Y=w900-h433)
+![short demo](http://i.imgur.com/6i96wgG.gif)
