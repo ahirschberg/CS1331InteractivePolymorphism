@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Driver {
     private static Scanner input;
+    // Notice we are giving chosenScrambler the type Scrambler here,
+    // even though Scrambler is an ABSTRACT class
     private static Scrambler chosenScrambler;
     private static String chosenText;
 
@@ -9,7 +11,7 @@ public class Driver {
      * Allow the user to interact with various Scramblers
      * @param args ignored in this case
      */
-    public static void main(String args) {
+    public static void main(String[] args) {
         input = new Scanner(System.in);
 
         while (true) {
@@ -30,28 +32,6 @@ public class Driver {
     }
 
     /**
-     * Allows the user to choose a scrambler from the list provided
-     */
-    private static void chooseScrambler() {
-        System.out.println("1: UppercaseScrambler");
-        System.out.println("2: BackwardsScrambler");
-        String choice = input.nextLine().trim();
-        if (choice.equals("1")) {
-            chosenScrambler = new UppercaseScrambler();
-        } else {
-            chosenScrambler = new BackwardsScrambler();
-        }
-    }
-
-    /**
-     * Allows the user to choose some text to scramble
-     */
-    private static void chooseText() {
-        System.out.print("Type some text here ~> ");
-        chosenText = input.nextLine();
-    }
-
-    /**
      * Displays the text and scrambler for the user to see
      */
     private static void displayVariables() {
@@ -67,8 +47,14 @@ public class Driver {
     private static void showScramblerOutput() {
         System.out.println("Scrambler output:");
         colorMyTerminal("bold and brave");
-        System.out.printf("%s(\"%s\") = \"%s\"\n", chosenScrambler, chosenText,
-                chosenScrambler.scramble(chosenText));
+
+        System.out.printf("%s: scramble(\"%s\")\n", chosenScrambler, chosenText);
+
+        // Here we call the scramble method of chosenScrambler, although we
+        // don't yet know which scrambler the user is going to select.
+        String scrambledText = chosenScrambler.scramble(chosenText);
+        System.out.printf("=>  %s", scrambledText);
+
         colorMyTerminal("reset");
     }
 
@@ -82,6 +68,32 @@ public class Driver {
         System.out.print("\nWhat do you want to do? ~> ");
     }
 
+    /**
+     * Allows the user to choose a scrambler from the list provided
+     */
+    private static void chooseScrambler() {
+        System.out.println("1: UppercaseScrambler");
+        System.out.println("2: BackwardsScrambler");
+        String choice = input.nextLine().trim();
+
+        // This is where the polymorphism happens!
+        // Even though chosenScrambler is of type Scrambler, we are able
+        // to instantiate it via its concrete subclasses!
+        if (choice.equals("1")) {
+            chosenScrambler = new UppercaseScrambler();
+        } else {
+            chosenScrambler = new BackwardsScrambler();
+        }
+    }
+
+    /**
+     * Allows the user to choose some text to scramble
+     */
+    private static void chooseText() {
+        System.out.print("Type some text here ~> ");
+        chosenText = input.nextLine();
+    }
+
 
 
 
@@ -90,21 +102,17 @@ public class Driver {
 
 
 
-
-
-
-
-
     /**
-     * Some evil magic to color the output on Linux, Mac, and Git Bash.
-     * Sorry CMD.exe you're stuck in the past.
+     * Some magic to color the output on Linux, Mac, and probably Git Bash.
+     * Sorry CMD.exe you're stuck in the dark ages.
      * Bash on Ubuntu on Windows 10 is really neat though, google it
      * @param cmd some string referring to the coloring mode.
      */
     private static void colorMyTerminal(String cmd) {
         if (System.getenv("TERM").equals("")) {
-            // If $TERM isn't set, the user's system probably doesn't support 
+            // If $TERM isn't set, the user's system probably doesn't support
             // our ANSI color codes. Instead we do nothing. :(
+            // AKA windows CMD.exe
             return;
         } else {
             switch (cmd) {
