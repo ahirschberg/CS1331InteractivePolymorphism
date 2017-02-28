@@ -2,8 +2,6 @@ Scrambler
 ---
 #### A CS1331 Interactive Polymorphism Example
 
-![short demo]()
-
 Here's what I plan to do for my recitation. **I'd recommend looking at the Driver.java file as you read along with this, so that you can see what I'm talking about**
 
 1. Give your students the premise of the problem: you want a program that allows you to scramble input in various ways, and prints it back out. Show them the `Scrambler` abstract class, containing the `scramble` method.
@@ -18,3 +16,8 @@ Here's what I plan to do for my recitation. **I'd recommend looking at the Drive
 8. Trace the main method's code down to `chooseScrambler()` and look at that method next.
 9. Find the subclass instantiations and show them how this is the part of the code that makes it all possible. Remind them that Scrambler is abstract, but a `BackwardsScrambler` is-a `Scrambler`, so we can say Scrambler `chosenScrambler = new BackwardsScrambler()`.
 10. *(If you have more time / if the students seem comfortable with what you have so far.)* Mention that there is another Scrambler type that we didn't include in the list of options, and thus there's no way to get to it with the code given. Show how you can add a Scrambler[] array to the Driver class and let the user pick any scrambler out of the array to use instead, to reduce hardcoding.
+
+
+Short demo:
+
+![short demo](https://lh6.googleusercontent.com/ukLd70Oh63hHn6_Q2zZQ0CCQSEh6poYhQ0vRutj6upSyeKEtA7kv9xSq7LrphGWWYcmqlxg6EnLN05Y=w900-h433)
