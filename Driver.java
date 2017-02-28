@@ -109,7 +109,8 @@ public class Driver {
      * @param cmd some string referring to the coloring mode.
      */
     private static void colorMyTerminal(String cmd) {
-        if (System.getenv("TERM").equals("")) {
+        String termInfo = System.getenv("TERM");
+        if (termInfo == null || termInfo.equals("")) {
             // If $TERM isn't set, the user's system probably doesn't support
             // our ANSI color codes. Instead we do nothing. :(
             // AKA windows CMD.exe
